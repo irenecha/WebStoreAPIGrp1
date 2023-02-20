@@ -25,7 +25,7 @@ import lombok.ToString;
 @Table( name="payments")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
-public class Payment {
+public abstract class Payment {
 	
 		@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 		@JoinColumn(name="id_payment")
