@@ -3,6 +3,8 @@ package com.m2i.WebStore.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.github.javafaker.Faker;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +22,7 @@ import lombok.ToString;
 
 @Entity @Table(name="command")
 
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class Command {
 
@@ -39,4 +41,10 @@ public class Command {
 	
 	@OneToMany(targetEntity = CommandLine.class, mappedBy = "command")
 	private List<CommandLine> commandLines;
+	
+	public Command(User u) {
+		Faker f = new Faker();
+		this.user = u;
+		this.commandDate = f.date().birthday();
+	}
 }
