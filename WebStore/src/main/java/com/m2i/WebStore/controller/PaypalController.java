@@ -12,42 +12,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.m2i.WebStore.entity.UserInformations;
-import com.m2i.WebStore.services.UserInformationsService;
+import com.m2i.WebStore.entity.PaypalPayment;
+import com.m2i.WebStore.services.PaypalPaymentService;
 
 
 @RestController
-@RequestMapping("/userinformations")
-public class UserInformationsController {
+@RequestMapping("/paypalpayment")
+public class PaypalController {
 	
 	@Autowired
-	UserInformationsService uiService;
+	PaypalPaymentService pService;
 	
 	@GetMapping("/{id}")
-	public UserInformations getUserInformationsById(@PathVariable("id") int id) {
-		return uiService.getById(id);
+	public PaypalPayment getUserInformationsById(@PathVariable("id") int id) {
+		return pService.getById(id);
 	}
 	
 	
 	@GetMapping
-	public List<UserInformations> getAllUserInformations(){
-		return uiService.getAll();
+	public List<PaypalPayment> getAllUserInformations(){
+		return pService.getAll();
 	}
 	
 	@PostMapping
-	public void postUserInfomations(@RequestBody UserInformations ui) {
-		uiService.create(ui);
+	public void postUserInfomations(@RequestBody PaypalPayment pp) {
+		pService.create(pp);
 	}
 	
 
 	@PutMapping("/{id}")
-	public void putUserInformations(@PathVariable("id") int id,@RequestBody UserInformations ui) {
-		uiService.update(id, ui);
+	public void putUserInformations(@PathVariable("id") int id,@RequestBody PaypalPayment pp) {
+		pService.update(id, pp);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void deleteUserInformations(@PathVariable("id") int id) {
-		uiService.delete(id);
+		pService.delete(id);
 	}
 
 }
