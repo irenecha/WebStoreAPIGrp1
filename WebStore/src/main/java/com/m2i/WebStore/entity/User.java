@@ -2,6 +2,8 @@ package com.m2i.WebStore.entity;
 
 import java.util.List;
 
+import com.github.javafaker.Faker;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +22,7 @@ import lombok.ToString;
 
 @Entity @Table(name="user")
 
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class User {
 	
@@ -47,5 +49,13 @@ public class User {
 	
 	@OneToMany(targetEntity = Command.class, mappedBy = "user")
 	private List<Command> commands;
+	
+	public User() {
+		Faker f = new Faker();
+		
+		this.login = f.name().username();
+		this.password = f.internet().password(8, 25, true, true, true);
+		this.connectionNumber = f.number().randomDigit();	
+		}
 
 }
