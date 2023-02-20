@@ -46,12 +46,15 @@ public class User {
     @JoinTable( name = "user_role_association",
 			    joinColumns = @JoinColumn( name = "id_user" ),
 			    inverseJoinColumns = @JoinColumn( name = "id_role" ) )
+	@Getter  @Setter 
 	private List<Role> roles;
 	
 	@OneToMany(targetEntity = Command.class, mappedBy = "user")
+	@Getter  @Setter 
 	private List<Command> commands;
 	
 	@OneToOne( mappedBy = "user")	
+	@Getter  @Setter 
 	private UserInformations informations;
 	
 	public User() {
