@@ -26,12 +26,14 @@ public class UserController {
 	@GetMapping("/fake/")
 	public User fakeUser() {
 		User u = new User();
+		u.setInformations(new UserInformations(u));
 		
 //		for (int i = 0; i < nbVideos; i++) {
-//			u.getInformations().add(new UserInformations(u));
+//			
 //			u.getRoles().add(new Roles());
 //
 //		}
+		
 		uService.create(u);
 		return u;
 	}
