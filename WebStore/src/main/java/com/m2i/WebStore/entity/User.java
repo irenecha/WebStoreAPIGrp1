@@ -49,11 +49,11 @@ public class User {
 	@Getter  @Setter 
 	private List<Role> roles;
 	
-	@OneToMany(targetEntity = Command.class, mappedBy = "users")
+	@OneToMany(targetEntity = Command.class, mappedBy = "user")
 	@Getter  @Setter 
 	private List<Command> commands;
 	
-	@OneToOne( mappedBy = "users")	
+	@OneToOne( mappedBy = "user")	
 	@Getter  @Setter 
 	private UserInformations informations;
 	
