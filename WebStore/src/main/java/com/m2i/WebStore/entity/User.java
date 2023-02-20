@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity @Table(name="user")
+@Entity @Table(name="users")
 
 @AllArgsConstructor
 @ToString
@@ -49,11 +49,11 @@ public class User {
 	@Getter  @Setter 
 	private List<Role> roles;
 	
-	@OneToMany(targetEntity = Command.class, mappedBy = "user")
+	@OneToMany(targetEntity = Command.class, mappedBy = "users")
 	@Getter  @Setter 
 	private List<Command> commands;
 	
-	@OneToOne( mappedBy = "user")	
+	@OneToOne( mappedBy = "users")	
 	@Getter  @Setter 
 	private UserInformations informations;
 	
