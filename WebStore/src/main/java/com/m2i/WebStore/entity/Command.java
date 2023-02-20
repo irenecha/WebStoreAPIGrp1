@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Entity @Table(name="command")
@@ -26,6 +27,7 @@ public class Command {
 	@Getter
 	private int idCommand;
 	
+	@Getter @Setter
 	private Date commandDate;
 	
 	@ManyToOne
