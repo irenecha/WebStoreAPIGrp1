@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.m2i.WebStore.entity.Role;
 import com.m2i.WebStore.entity.User;
 import com.m2i.WebStore.entity.UserInformations;
+import com.m2i.WebStore.services.RoleService;
 import com.m2i.WebStore.services.UserService;
 
 @RestController
@@ -22,17 +24,19 @@ public class UserController {
 
 	@Autowired
 	UserService uService;
+	@Autowired
+	RoleService rService;
 	
-	@GetMapping("/fake/")
-	public User fakeUser() {
+	@GetMapping("/fake/{roles}")
+	public User fakeUser(@PathVariable("roles") int nbRoles) {
 		User u = new User();
 		u.setInformations(new UserInformations(u));
 		
-//		for (int i = 0; i < nbVideos; i++) {
-//			
-//			u.getRoles().add(new Roles());
-//
-//		}
+		List<Role> roles = rService.getAll();		
+		for (int i = 0; i < nbRoles; i++) {
+			int nb = (int) Math.random()*roles.size();			
+			u.getRoles().add(roles.get(nb));
+		}
 		
 		uService.create(u);
 		return u;
