@@ -33,10 +33,16 @@ public class CommandLine {
 	@JoinColumn(name = "id_article")
 	private Article article;
 	
-	public CommandLine(Command c, Article a) {
+	public CommandLine(Command c) {
 		Faker f = new Faker();
-		this.article = a;
 		this.command = c;
 		this.quantity = f.number().numberBetween(0, 400);
 	}
+	
+	public CommandLine(Article a) {
+		Faker f = new Faker();
+		this.article = a;
+		this.quantity = f.number().numberBetween(0, 400);
+	}
+	
 }

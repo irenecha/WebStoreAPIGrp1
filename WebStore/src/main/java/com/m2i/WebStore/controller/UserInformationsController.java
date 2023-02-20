@@ -17,7 +17,7 @@ import com.m2i.WebStore.services.UserInformationsService;
 
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/userinformations")
 public class UserInformationsController {
 	
 	@Autowired
