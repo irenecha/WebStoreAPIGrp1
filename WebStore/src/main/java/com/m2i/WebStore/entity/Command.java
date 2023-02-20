@@ -1,5 +1,7 @@
 package com.m2i.WebStore.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,26 +10,17 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
-@Entity @Table(name="user")
+@Entity @Table(name="command")
 
 @AllArgsConstructor @NoArgsConstructor
 @ToString
-public class User {
-	
+public class Command {
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter
-	private int idUser;
+	private int idCommand;
 	
-	@Getter  @Setter 
-	private String login;
-	
-	@Getter  @Setter 
-	private String password;
-	
-	@Getter  @Setter 
-	private int connectionNumber;
-
+	private Date commandDate;
 }
