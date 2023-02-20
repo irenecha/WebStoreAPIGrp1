@@ -2,6 +2,7 @@ package com.m2i.WebStore.entity;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class User {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter
+	@Column(name="id_user")
 	private int idUser;
 	
 	@Getter  @Setter 
@@ -34,6 +36,7 @@ public class User {
 	private String password;
 	
 	@Getter  @Setter 
+	@Column(name="connection_number")
 	private int connectionNumber;
 	
 	@ManyToMany

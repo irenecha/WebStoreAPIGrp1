@@ -3,6 +3,7 @@ package com.m2i.WebStore.entity;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,9 +26,11 @@ public class Command {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter
+	@Column(name="id_command")
 	private int idCommand;
 	
 	@Getter @Setter
+	@Column(name="command_date")
 	private Date commandDate;
 	
 	@ManyToOne
