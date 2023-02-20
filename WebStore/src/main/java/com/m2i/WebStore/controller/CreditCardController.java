@@ -13,45 +13,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.m2i.WebStore.entity.Article;
-import com.m2i.WebStore.services.ArticleService;
+import com.m2i.WebStore.entity.CreditCardPayment;
+import com.m2i.WebStore.services.CreditCardPaymentService;
 
 @RestController
-@RequestMapping("/article")
-public class ArticleController {
+@RequestMapping("/creditcardpayment")
+public class CreditCardController {
 
 	@Autowired
-	ArticleService aService;
-	
-	@GetMapping("/fake")
-	public Article fakeArticle() {
-		Article a = new Article();
-		aService.create(a);
-		return a;
-	}
+	CreditCardPaymentService ccService;
 	
 	@GetMapping("/{id}")
-	public Article getArticleById(@PathVariable("id") int id) {
-		return aService.getById(id);
+	public CreditCardPayment getCreditCardPaymentById(@PathVariable("id") int id) {
+		return ccService.getById(id);
 	}
 	
 	@GetMapping
-	public List<Article> getAllArticles(){
-		return aService.getAll();
+	public List<CreditCardPayment> getAllCreditCardPayments(){
+		return ccService.getAll();
 	}
 	
 	@PostMapping
-	public void postArticle(@RequestBody Article a) {
-		aService.create(a);
+	public void postCreditCardPayment(@RequestBody CreditCardPayment c) {
+		ccService.create(c);
 	}
 	
 	@PutMapping("/{id}")
-	public void putArticle(@PathVariable("id") int id,@RequestBody Article a) {
-		aService.update(id, a);
+	public void putCreditCardPayment(@PathVariable("id") int id,@RequestBody CreditCardPayment c) {
+		ccService.update(id, c);
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteArticle(@PathVariable("id") int id) {
-		aService.delete(id);
+	public void deleteCreditCardPayment(@PathVariable("id") int id) {
+		ccService.delete(id);
 	}
-	
 }

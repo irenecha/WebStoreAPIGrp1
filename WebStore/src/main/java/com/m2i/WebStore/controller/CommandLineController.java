@@ -9,46 +9,43 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.m2i.WebStore.entity.CommandLine;
 import com.m2i.WebStore.services.CommandLineService;
 
+@RestController
+@RequestMapping("/commandline")
 public class CommandLineController {
 
 
 	@Autowired
-	CommandLineService cService;
-	
-	@GetMapping("/fake")
-	public CommandLine fakeCommandLine() {
-		CommandLine c = new CommandLine();
-		cService.create(c);
-		return c;
-	}
+	CommandLineService clService;
 	
 	@GetMapping("/{id}")
 	public CommandLine getCommandLineById(@PathVariable("id") int id) {
-		return cService.getById(id);
+		return clService.getById(id);
 	}
 	
 	@GetMapping
-	public List<CommandLine> getAll(){
-		return cService.getAll();
+	public List<CommandLine> getAllCommandLines(){
+		return clService.getAll();
 	}
 	
 	@PostMapping
 	public void postCommandLine(@RequestBody CommandLine c) {
-		cService.create(c);
+		clService.create(c);
 	}
 	
 	@PutMapping("/{id}")
 	public void putCommandLine(@PathVariable("id") int id,@RequestBody CommandLine c) {
-		cService.update(id, c);
+		clService.update(id, c);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void deleteCommandLine(@PathVariable("id") int id) {
-		cService.delete(id);
+		clService.delete(id);
 	}
 	
 }
