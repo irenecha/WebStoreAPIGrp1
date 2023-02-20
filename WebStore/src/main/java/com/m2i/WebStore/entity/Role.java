@@ -33,7 +33,7 @@ public class Role {
 
 	public Role(String roleName) {
 		super();
-		roleName = roleName;
+		this.roleName = roleName;
 	}
 
 	

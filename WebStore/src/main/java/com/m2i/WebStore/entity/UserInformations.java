@@ -1,5 +1,7 @@
 package com.m2i.WebStore.entity;
 
+import com.github.javafaker.Faker;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,12 +35,14 @@ public class UserInformations {
     @JoinColumn( name="id_user", nullable=false )
     private User user;
 
-	public UserInformations(String adress, String city, String email, String phoneNumber, User user) {
+	public UserInformations(User user) {
 		super();
-		this.adress = adress;
-		this.city = city;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
+		
+		Faker faker=new Faker();
+		this.adress = faker.address().streetAddress();
+		this.city = faker.address().city();
+		this.email = faker.internet().emailAddress();
+		this.phoneNumber = faker.phoneNumber().cellPhone();
 		this.user = user;
 	}
 	
