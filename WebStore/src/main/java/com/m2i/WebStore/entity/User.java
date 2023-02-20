@@ -13,6 +13,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -49,6 +50,9 @@ public class User {
 	
 	@OneToMany(targetEntity = Command.class, mappedBy = "user")
 	private List<Command> commands;
+	
+	@OneToOne( mappedBy = "user")	
+	private UserInformations informations;
 	
 	public User() {
 		Faker f = new Faker();

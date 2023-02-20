@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,6 +42,9 @@ public class Command {
 	
 	@OneToMany(targetEntity = CommandLine.class, mappedBy = "command")
 	private List<CommandLine> commandLines;
+	
+	@OneToOne( mappedBy = "command")	
+	private Payment payments;
 	
 	public Command(User u) {
 		Faker f = new Faker();
