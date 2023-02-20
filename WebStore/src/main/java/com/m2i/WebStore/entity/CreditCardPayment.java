@@ -23,8 +23,8 @@ public class CreditCardPayment extends Payment {
 		@Column(name="expiration_date")
 		private Date dateExp;
 		
-		public CreditCardPayment() {
-			super();
+		public CreditCardPayment(Command command) {
+			super(command);
 			
 			Faker faker = new Faker();
 		

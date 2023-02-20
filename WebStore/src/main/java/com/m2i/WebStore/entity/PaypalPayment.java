@@ -18,8 +18,8 @@ public class PaypalPayment extends Payment {
 		@Column(name="account_number")
 		private String AccountNumber;
 		
-		public PaypalPayment() {
-			super();
+		public PaypalPayment(Command command) {
+			super(command);
 			Faker faker = new Faker();
 			
 			this.AccountNumber = faker.toString();

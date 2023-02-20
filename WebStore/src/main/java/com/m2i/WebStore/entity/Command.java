@@ -36,13 +36,16 @@ public class Command {
 	@Column(name="command_date")
 	private Date commandDate;
 	
+	@Getter @Setter
 	@ManyToOne
 	@JoinColumn(name="id_user")
 	private User user;
 	
+	@Getter @Setter
 	@OneToMany(targetEntity = CommandLine.class, mappedBy = "command")
 	private List<CommandLine> commandLines;
 	
+	@Getter @Setter
 	@OneToOne( mappedBy = "command")	
 	private Payment payments;
 	

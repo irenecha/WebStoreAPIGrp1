@@ -32,7 +32,7 @@ public class UserInformations {
 	private String phoneNumber;
 	
 	@OneToOne( cascade = CascadeType.ALL ) 
-    @JoinColumn( name="id_user", nullable=false )
+    @JoinColumn( name="id_user", nullable=false, referencedColumnName="idUser" )
     private User user;
 
 	public UserInformations(User user) {
