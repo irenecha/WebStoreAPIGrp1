@@ -17,13 +17,14 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Entity
 @Table( name="payments")
 @Inheritance(strategy = InheritanceType.JOINED)
-@Getter @Setter @ToString @AllArgsConstructor
+@Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class Payment {
 	
 		@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,13 +40,14 @@ public class Payment {
 	    @JoinColumn( name="id_command" )
 	    private Command command;
 		
-		public Payment() {
+		public Payment(Command command) {
 			super();
 			
 			Faker faker = new Faker();
 		
 			this.amount = faker.number().randomDigit();
 			this.paymentDate = faker.date().birthday();
+			this.command = command;
 			
 		}
 	
