@@ -30,7 +30,18 @@ public class UserInformations {
 	private String phoneNumber;
 	
 	@OneToOne( cascade = CascadeType.ALL ) 
-    @JoinColumn( name="id_user" )
+    @JoinColumn( name="id_user", nullable=false )
     private User user;
+
+	public UserInformations(String adress, String city, String email, String phoneNumber, User user) {
+		super();
+		this.adress = adress;
+		this.city = city;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.user = user;
+	}
+	
+	
 
 }
