@@ -1,5 +1,6 @@
 package com.m2i.WebStore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.javafaker.Faker;
 
 import jakarta.persistence.Column;
@@ -27,6 +28,7 @@ public class CommandLine {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_command")
+	@JsonIgnore
 	private Command command;
 	
 	@ManyToOne

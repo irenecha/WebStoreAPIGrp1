@@ -62,14 +62,7 @@ public class UserController {
 		u.setInformations(ui);
 		uiService.create(ui);
 		
-		List<Role> roles = rService.getAll();	
-		List<Role> newRoles = new ArrayList();
-		for (int i = 0; i < nbRoles; i++) {
-			int nb1 = (int) Math.random()*roles.size();			
-			newRoles.add(roles.get(nb1));
-		}
-		u.setRoles(newRoles);
-		
+
 		
 		List<Command> newCommands= new ArrayList();
 		for (int i =0; i<nbCommands; i++) {
@@ -100,6 +93,17 @@ public class UserController {
 			newCommands.add(c);
 			}
 			u.setCommands(newCommands);
+			
+			List<Role> roles = rService.getAll();	
+			List<Role> newRoles = new ArrayList();
+			for (int i = 0; i < nbRoles; i++) {
+				System.out.println(roles.size());
+				int nb1 = (int) (Math.random()*roles.size());			
+				newRoles.add(roles.get(nb1));
+				roles.remove(nb1);
+			}
+			u.setRoles(newRoles);
+			System.out.println(newRoles);
 		return u;
 		}
 		
