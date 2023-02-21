@@ -17,7 +17,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity @Table(name="commandLine")
-@Getter @Setter @AllArgsConstructor @ToString @NoArgsConstructor
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class CommandLine {
 	
 	@Id @GeneratedValue( strategy = GenerationType.IDENTITY)
@@ -44,5 +44,12 @@ public class CommandLine {
 		this.article = a;
 		this.quantity = f.number().numberBetween(0, 400);
 	}
+
+	@Override
+	public String toString() {
+		return "CommandLine [idCommandLine=" + idCommandLine + ", quantity=" + quantity + ", article=" + article + "]";
+	}
+	
+	
 	
 }

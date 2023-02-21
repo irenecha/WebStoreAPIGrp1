@@ -3,6 +3,7 @@ package com.m2i.WebStore.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.javafaker.Faker;
 
 import jakarta.persistence.Column;
@@ -24,7 +25,6 @@ import lombok.ToString;
 @Entity @Table(name="command")
 
 @AllArgsConstructor
-@ToString
 public class Command {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +39,7 @@ public class Command {
 	@Getter @Setter
 	@ManyToOne
 	@JoinColumn(name="id_user")
+	@JsonIgnore
 	private User user;
 	
 	@Getter @Setter
@@ -46,12 +47,27 @@ public class Command {
 	private List<CommandLine> commandLines;
 	
 	@Getter @Setter
-	@OneToOne( mappedBy = "command")	
+	@OneToOne( mappedBy = "command")
 	private Payment payments;
 	
+	
+	
 	public Command(User u) {
+		super();
 		Faker f = new Faker();
 		this.user = u;
 		this.commandDate = f.date().birthday();
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Command [idCommand=" + idCommand + ", commandDate=" + commandDate + ", commandLines=" + commandLines
+				+ ", payments=" + payments + "]";
+	}
+
+
+
+	
 }

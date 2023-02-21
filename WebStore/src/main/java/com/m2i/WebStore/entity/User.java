@@ -25,7 +25,6 @@ import lombok.ToString;
 @Entity @Table(name="users")
 
 @AllArgsConstructor
-@ToString
 public class User {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,7 +53,7 @@ public class User {
 	@Getter  @Setter 
 	private List<Command> commands;
 	
-	@OneToOne( mappedBy = "user")	
+	@OneToOne( mappedBy = "user")
 	@Getter  @Setter 
 	private UserInformations informations;
 	
@@ -66,4 +65,12 @@ public class User {
 		this.connectionNumber = f.number().randomDigit();	
 		}
 
+	@Override
+	public String toString() {
+		return "User [idUser=" + idUser + ", login=" + login + ", password=" + password + ", connectionNumber="
+				+ connectionNumber + ", roles=" + roles + ", commands=" + commands + ", informations=" + informations
+				+ "]";
+	}
+
+	
 }

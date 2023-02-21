@@ -17,7 +17,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity @Table(name="role")
-@Getter @Setter @NoArgsConstructor @ToString 
+@Getter @Setter @NoArgsConstructor
 public class Role {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +34,11 @@ public class Role {
 	public Role(String roleName) {
 		super();
 		this.roleName = roleName;
+	}
+
+	@Override
+	public String toString() {
+		return "Role [idRole=" + idRole + ", roleName=" + roleName + "]";
 	}
 
 	

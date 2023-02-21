@@ -23,7 +23,13 @@ import com.m2i.WebStore.entity.Role;
 import com.m2i.WebStore.entity.User;
 import com.m2i.WebStore.entity.UserInformations;
 import com.m2i.WebStore.services.ArticleService;
+import com.m2i.WebStore.services.CommandLineService;
+import com.m2i.WebStore.services.CommandService;
+import com.m2i.WebStore.services.CreditCardPaymentService;
+import com.m2i.WebStore.services.PaymentService;
+import com.m2i.WebStore.services.PaypalPaymentService;
 import com.m2i.WebStore.services.RoleService;
+import com.m2i.WebStore.services.UserInformationsService;
 import com.m2i.WebStore.services.UserService;
 
 @RestController
@@ -36,11 +42,25 @@ public class UserController {
 	RoleService rService;
 	@Autowired
 	ArticleService aService;
+	@Autowired
+	UserInformationsService uiService;
+	@Autowired
+	CommandService cService;
+	@Autowired
+	CommandLineService clService;
+	@Autowired
+	PaypalPaymentService ppService;
+	@Autowired
+	CreditCardPaymentService ccService;
 	
 	@GetMapping("/fake/{roles}/{commands}/{commandLines}/{payment}")
 	public User fakeUser(@PathVariable("roles") int nbRoles, @PathVariable("commands") int nbCommands, @PathVariable("commandLines") int nbCommandLines, @PathVariable("payment") int typePayment) {
 		User u = new User();
-		u.setInformations(new UserInformations(u));
+		uService.create(u);
+		UserInformations ui = new UserInformations();
+		ui.setUser(u);
+		u.setInformations(ui);
+		uiService.create(ui);
 		
 		List<Role> roles = rService.getAll();	
 		List<Role> newRoles = new ArrayList();
@@ -50,32 +70,40 @@ public class UserController {
 		}
 		u.setRoles(newRoles);
 		
+		
 		List<Command> newCommands= new ArrayList();
 		for (int i =0; i<nbCommands; i++) {
 			Command c = new Command(u);
+			System.out.println(c);
+			cService.create(c);
 			if(typePayment==0) {
-				c.setPayments(new PaypalPayment(c));
+				PaypalPayment pp=new PaypalPayment();
+				pp.setCommand(c);
+				c.setPayments(pp);
+				ppService.create(pp);
 			}
 			if(typePayment == 1) {
-				c.setPayments(new CreditCardPayment(c));
+				CreditCardPayment cc= new CreditCardPayment();
+				cc.setCommand(c);
+				c.setPayments(cc);
+				ccService.create(cc);
 			}
 			
 			List<CommandLine> newCommandLines= new ArrayList();
 			for(int j=0; j<nbCommandLines; j++) {
 				List<Article> articles = aService.getAll();	
 				int nb2 = (int) Math.random()*articles.size();
-				newCommandLines.add(new CommandLine(articles.get(nb2)));
-			}
+				CommandLine cl=new CommandLine(articles.get(nb2));
+				clService.create(cl);
+				newCommandLines.add(cl);}
 			c.setCommandLines(newCommandLines);
 			newCommands.add(c);
-		}
-		u.setCommands(newCommands);
-		
-		
-		
-		uService.create(u);
+			}
+			u.setCommands(newCommands);
 		return u;
-	}
+		}
+		
+		
 	
 	
 	@GetMapping("/{id}")

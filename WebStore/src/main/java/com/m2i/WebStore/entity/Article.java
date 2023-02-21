@@ -14,7 +14,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity @Table(name = "article")
-@Getter @Setter @AllArgsConstructor @ToString
+@Getter @Setter @AllArgsConstructor
 public class Article { 
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)

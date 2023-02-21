@@ -14,7 +14,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name="credit_card_payments")
-@Getter @Setter @ToString @AllArgsConstructor
+@Getter @Setter @AllArgsConstructor @ToString
 public class CreditCardPayment extends Payment {
 		
 		@Column(name="card_number")
@@ -23,8 +23,8 @@ public class CreditCardPayment extends Payment {
 		@Column(name="expiration_date")
 		private Date dateExp;
 		
-		public CreditCardPayment(Command command) {
-			super(command);
+		public CreditCardPayment() {
+			super();
 			
 			Faker faker = new Faker();
 		

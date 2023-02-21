@@ -1,8 +1,10 @@
 package com.m2i.WebStore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.javafaker.Faker;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,10 +19,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity @Table(name="user_informations")
-@Getter @Setter @NoArgsConstructor @ToString @AllArgsConstructor
+@Getter @Setter @ToString @AllArgsConstructor
 public class UserInformations {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_informations")
 	private int idInformations;
 	
 	private String adress;
@@ -32,10 +35,11 @@ public class UserInformations {
 	private String phoneNumber;
 	
 	@OneToOne( cascade = CascadeType.ALL ) 
-    @JoinColumn( name="id_user", nullable=false, referencedColumnName="idUser" )
+    @JoinColumn( name="id_informations" )	
+	@JsonIgnore
     private User user;
 
-	public UserInformations(User user) {
+	public UserInformations() {
 		super();
 		
 		Faker faker=new Faker();
@@ -43,7 +47,6 @@ public class UserInformations {
 		this.city = faker.address().city();
 		this.email = faker.internet().emailAddress();
 		this.phoneNumber = faker.phoneNumber().cellPhone();
-		this.user = user;
 	}
 	
 	

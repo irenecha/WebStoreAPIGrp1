@@ -12,14 +12,14 @@ import lombok.ToString;
 
 @Entity
 @Table(name="paypal_payments")
-@Getter @Setter @ToString @AllArgsConstructor
+@Getter @Setter @AllArgsConstructor @ToString
 public class PaypalPayment extends Payment {
 		
 		@Column(name="account_number")
 		private String AccountNumber;
 		
-		public PaypalPayment(Command command) {
-			super(command);
+		public PaypalPayment() {
+			super();
 			Faker faker = new Faker();
 			
 			this.AccountNumber = faker.toString();
