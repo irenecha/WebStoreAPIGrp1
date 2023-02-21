@@ -25,6 +25,7 @@ import lombok.ToString;
 @Entity @Table(name="command")
 
 @AllArgsConstructor
+@NoArgsConstructor
 public class Command {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
