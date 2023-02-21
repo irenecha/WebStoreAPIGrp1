@@ -87,6 +87,7 @@ public class UserController {
 				List<Article> articles = aService.getAll();	
 				int nb2 = (int) (Math.random()*articles.size());
 				CommandLine cl=new CommandLine(articles.get(nb2));
+				cl.setCommand(c);
 				clService.create(cl);
 				newCommandLines.add(cl);}
 			c.setCommandLines(newCommandLines);

@@ -67,8 +67,8 @@ public class CommandLineController {
 		aService.create(a);
 		CommandLine cl = new CommandLine(a);
 		clService.create(cl);
-
 		Command c = cService.getById(id);
+		cl.setCommand(c);
 		List<CommandLine> commandLines = c.getCommandLines();
 		commandLines.add(cl);
 		c.setCommandLines(commandLines);

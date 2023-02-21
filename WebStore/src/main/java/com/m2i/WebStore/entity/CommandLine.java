@@ -36,12 +36,14 @@ public class CommandLine {
 	private Article article;
 	
 	public CommandLine(Command c) {
+		super();
 		Faker f = new Faker();
 		this.command = c;
 		this.quantity = f.number().numberBetween(0, 400);
 	}
 	
 	public CommandLine(Article a) {
+		super();
 		Faker f = new Faker();
 		this.article = a;
 		this.quantity = f.number().numberBetween(0, 400);
