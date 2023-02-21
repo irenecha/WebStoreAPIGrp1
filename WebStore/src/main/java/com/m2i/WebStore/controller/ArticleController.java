@@ -1,5 +1,6 @@
 package com.m2i.WebStore.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.m2i.WebStore.entity.Article;
@@ -52,6 +54,20 @@ public class ArticleController {
 	@DeleteMapping("/{id}")
 	public void deleteArticle(@PathVariable("id") int id) {
 		aService.delete(id);
+	}
+	
+	@GetMapping
+	public List<Article> getAllArticleSameBrand(@RequestParam("brand") String marque){
+		List<Article> articles = aService.getAll();
+		List<Article> articlesSameBrand = new ArrayList<>();
+		for(int i = 0; i<articles.size(); i++) {
+			Article a = articles.get(i);
+			String m = a.getBrand();
+			if(m.equals(marque)) {
+				articlesSameBrand.add(a);
+			}
+		}
+		return (articlesSameBrand);
 	}
 	
 }

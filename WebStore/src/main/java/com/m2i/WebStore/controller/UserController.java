@@ -135,4 +135,17 @@ public class UserController {
 	public void deleteEleve(@PathVariable("id") int id) {
 		uService.delete(id);
 	}
+	
+	@GetMapping("/total/{idUser}")
+	public int getTotalAmountByUserId(@PathVariable("idUser") int id) {
+		User u = uService.getById(id);
+		List<Command> commands = u.getCommands();
+		int amount = 0;
+		for(int i = 0; i<commands.size(); i++) {
+			Command c = commands.get(i);
+			Payment p = c.getPayments();
+			amount = amount + p.getAmount();
+		}
+		return(amount);
+	}
 }
