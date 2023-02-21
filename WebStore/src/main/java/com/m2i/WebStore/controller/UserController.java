@@ -1,7 +1,13 @@
 package com.m2i.WebStore.controller;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.xml.datatype.Duration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.m2i.WebStore.entity.Article;
@@ -26,7 +33,6 @@ import com.m2i.WebStore.services.ArticleService;
 import com.m2i.WebStore.services.CommandLineService;
 import com.m2i.WebStore.services.CommandService;
 import com.m2i.WebStore.services.CreditCardPaymentService;
-import com.m2i.WebStore.services.PaymentService;
 import com.m2i.WebStore.services.PaypalPaymentService;
 import com.m2i.WebStore.services.RoleService;
 import com.m2i.WebStore.services.UserInformationsService;
@@ -148,4 +154,46 @@ public class UserController {
 		}
 		return(amount);
 	}
+	
+	@GetMapping("/usercity")
+	public List<User> getUserInCity(@RequestParam("city") String ville){
+		List<User> users = uService.getAll();
+		List<User> usersSameCity = new ArrayList<>();
+		for(int i = 0; i<users.size(); i++) {
+			User u = users.get(i);
+			String c = u.getInformations().getCity();
+			if(c.equals(ville)) {
+				usersSameCity.add(u);
+			}
+		}
+		return(usersSameCity);
+	}
+	
+	
+	@GetMapping("/?city={ville}&duree={date}")
+	public List<User> getUserInCityInPeriod(@RequestParam("city") String ville, @RequestParam("duree") int date ){
+		List<User> users = uService.getAll();
+		List<User> usersSameCity = new ArrayList<>();
+		LocalDateTime dateNow = LocalDateTime.now();
+		
+		for(int i = 0; i<users.size(); i++) {
+			User u = users.get(i);
+			String c = u.getInformations().getCity();
+			if(c.equals(ville)) {
+				List<Command> commands = u.getCommands();
+				for(int j=0; j<commands.size(); j++) {
+					Date d = commands.get(j).getCommandDate();
+					Instant current = d.toInstant();
+					LocalDateTime ldt = LocalDateTime.ofInstant(current, ZoneId.systemDefault());
+					long daysBetween = java.time.Duration.between(ldt, dateNow).toDays();
+					if(daysBetween < date) {
+						usersSameCity.add(u);
+						break;
+					}
+				}
+			}
+		}
+		return(usersSameCity);
+	}
+	
 }

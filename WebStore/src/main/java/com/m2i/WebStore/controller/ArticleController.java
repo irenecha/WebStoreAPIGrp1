@@ -56,7 +56,7 @@ public class ArticleController {
 		aService.delete(id);
 	}
 	
-	@GetMapping
+	@GetMapping("/brand")
 	public List<Article> getAllArticleSameBrand(@RequestParam("brand") String marque){
 		List<Article> articles = aService.getAll();
 		List<Article> articlesSameBrand = new ArrayList<>();
@@ -68,6 +68,13 @@ public class ArticleController {
 			}
 		}
 		return (articlesSameBrand);
-	}
+	}	
 	
+	@PostMapping("/addliste")
+	public void postListArticles(@RequestBody List<Article> articles) {
+		for(int i = 0; i<articles.size(); i++) {
+			aService.create(articles.get(i));			
+		}
+		
+	}
 }
